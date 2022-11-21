@@ -1,0 +1,17 @@
+
+
+docker pull mysql
+
+docker run --name sankalpa-db -d -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=sankalpa mysql
+
+docker network create sankalpa-network
+
+docker network ls 
+
+docker network connect sankalpa-network sankalpa-db
+
+docker build -t spring-boot-image .
+
+docker run -p 8080:8080 --network=sankalpa-network spring-boot-image
+
+go to localhost:8080/Display.html
